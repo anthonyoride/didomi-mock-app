@@ -1,7 +1,6 @@
 import {Test} from '@nestjs/testing'
 import {EventsController} from './events.controller'
 import {EventsService} from '../services/events.service'
-import {UserModule} from '../users.module'
 
 describe('EventsController', () => {
     let eventsController: EventsController
@@ -9,9 +8,15 @@ describe('EventsController', () => {
 
     beforeAll(async() => {
         const moduleRef = await Test.createTestingModule({
-            imports: [UserModule],
             controllers: [EventsController],
-            providers: [EventsService]
+            providers: [
+                {
+                    provide: EventsService,
+                    useValue: {
+                        create: jest.fn()
+                    }
+                }
+            ]
         }).compile()
 
         eventsService = moduleRef.get<EventsService>(EventsService)
