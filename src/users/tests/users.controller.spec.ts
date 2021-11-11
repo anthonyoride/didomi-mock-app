@@ -1,5 +1,5 @@
 import {Test} from '@nestjs/testing'
-import {UsersController} from './users.controller'
+import {UsersController} from '../controllers/users.controller'
 import {UsersService} from '../services/users.service'
 
 describe('UsersController', () => {
@@ -14,7 +14,7 @@ describe('UsersController', () => {
                     provide: UsersService,
                     useValue: {
                         create: jest.fn(),
-                        findById: jest.fn(),
+                        getUser: jest.fn(),
                         delete: jest.fn()
                     }
                 }

@@ -23,5 +23,5 @@ export class Event {
 
     @ManyToOne(() => User, user => user.consents)
     @JoinColumn({name: 'user_id', referencedColumnName: 'id'})
-    user?: User
+    user: User
 }
