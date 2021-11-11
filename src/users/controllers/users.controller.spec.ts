@@ -42,7 +42,7 @@ describe('UsersController', () => {
         })
     })
 
-    describe('findById', () => {
+    describe('getUser', () => {
         it('should return a user and their consents', async () => {
             const result = {
                 id: 1,
@@ -59,8 +59,8 @@ describe('UsersController', () => {
                 ]
             }
 
-            jest.spyOn(usersService, 'findById').mockImplementation(async () => result)
-            expect(await usersController.findById(1)).toBe(result)
+            jest.spyOn(usersService, 'getUser').mockImplementation(async () => result)
+            expect(await usersController.getUser(1)).toBe(result)
         })
     })
 

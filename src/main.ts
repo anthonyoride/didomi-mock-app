@@ -5,7 +5,9 @@ import {useContainer} from 'class-validator'
 
 const bootstrap = async(): Promise<void> => {
     const app = await NestFactory.create(AppModule)
-    app.useGlobalPipes(new ValidationPipe())
+    app.useGlobalPipes(new ValidationPipe({
+        stopAtFirstError: true
+    }))
     app.setGlobalPrefix('api/v1')
     useContainer(app.select(AppModule), {fallbackOnErrors: true})
     await app.listen(3000)

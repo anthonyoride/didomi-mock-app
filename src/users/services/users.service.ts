@@ -1,4 +1,4 @@
-import {Injectable, NotFoundException} from '@nestjs/common'
+import {Injectable} from '@nestjs/common'
 import {Repository} from 'typeorm'
 import {User} from '../entities/user.entity'
 import {IUserPayload} from '../interfaces/user-payload.interface'
@@ -13,7 +13,7 @@ export class UsersService {
         return this.userRepository.save(payload)
     }
 
-    async findById(id: number): Promise<IUserPayload> {
+    async getUser(id: number): Promise<IUserPayload> {
         const user = await this.userRepository.createQueryBuilder('user')
             .where('user.id = :id', {id})
             .leftJoin('user.consents', 'consent')
@@ -22,10 +22,6 @@ export class UsersService {
             .addOrderBy('consent.id', 'DESC')
             .distinctOn(['consent.cid'])
             .getOne()
-        
-        if(!user) {
-            throw new NotFoundException(null, 'User not found')
-        }
         
         return {
             id: user.id,
@@ -37,6 +33,10 @@ export class UsersService {
                 }
             })
         }
+    }
+
+    async findById(id: number) {
+        return this.userRepository.findOne(id)
     }
 
     async findByEmail(email: string): Promise<User> {

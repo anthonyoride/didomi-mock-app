@@ -4,14 +4,14 @@ import {ConsentItemsDto} from './consent-items.dto'
 import {UserExists} from '../../common/decorators/validations/user-exists.decorator'
 
 export class CreateEventDto {
-    @IsNotEmpty()
-    @IsInt()
     @Validate(UserExists)
+    @IsInt()
+    @IsNotEmpty()
     userId: number
 
-    @IsArray()
-    @ArrayMaxSize(2)
     @ValidateNested({each: true})
+    @ArrayMaxSize(2)
+    @IsArray()
     @Type(() => ConsentItemsDto)
     consents: ConsentItemsDto[]
 }
