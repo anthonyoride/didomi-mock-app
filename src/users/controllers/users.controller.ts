@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common'
 import {UsersService} from '../services/users.service'
 import {CreateUserDto} from '../dto/create-user.dto'
-import {UserValidationPipe} from '../../common/pipes/validations/user-validation.pipe'
+import {ParamValidationPipe} from '../../common/pipes/validations/param-validation.pipe'
 
 @Controller('users')
 export class UsersController {
@@ -24,12 +24,12 @@ export class UsersController {
 
     @Get(':id')
     @UseInterceptors(ClassSerializerInterceptor)
-    async getUser(@Param('id', ParseIntPipe, UserValidationPipe) id: number) {
+    async getUser(@Param('id', ParseIntPipe, ParamValidationPipe) id: number) {
         return this.usersService.getUser(id)
     }
 
     @Delete('delete/:id')
-    async delete(@Param('id', ParseIntPipe, UserValidationPipe) id: number) {
+    async delete(@Param('id', ParseIntPipe, ParamValidationPipe) id: number) {
         return this.usersService.delete(id)
     }
 }

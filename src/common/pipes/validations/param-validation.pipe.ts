@@ -2,7 +2,7 @@ import {PipeTransform, Injectable, ArgumentMetadata, NotFoundException} from '@n
 import {UsersService} from '../../../users/services/users.service'
 
 @Injectable()
-export class UserValidationPipe implements PipeTransform {
+export class ParamValidationPipe implements PipeTransform {
     constructor(private usersService: UsersService) {}
     async transform(value: any, metadata: ArgumentMetadata) {
         const user = await this.usersService.findById(value)
