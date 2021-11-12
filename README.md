@@ -36,7 +36,7 @@ $ npm install
 
 ```bash
 # database setup
-$ create database on a postgres client with credentials in .env.dev file and tables will be automatically migrated to your database
+$ create database on a postgres client with credentials in .env.dev file and tables will be automatically migrated to your database when the app starts
 
 # development
 $ npm run start
